@@ -24,8 +24,25 @@ class ViewController: UIViewController {
             
             guard let data = data else { return }
             
-            let  jsonString = String(data: data, encoding: .utf8)
-            print(jsonString)
+//            let  jsonString = String(data: data, encoding: .utf8)
+//            print(jsonString)
+            
+            // 2020-10-25 12:34:00
+            
+            do {
+                
+                let decoder = JSONDecoder()
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                
+                decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                
+                let lessons = try decoder.decode([Lesson].self, from: data)
+                print(lessons.first?.date)
+            }catch{
+                print(error)
+            }
+            
             
         }.resume()
     }
