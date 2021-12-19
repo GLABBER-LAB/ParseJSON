@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let urlString = "https://icodeschool.ru/json1.php"
+        let urlString = "https://icodeschool.ru/json2.php"
         
         guard let url = URL(string: urlString) else { return }
         
@@ -38,7 +38,7 @@ class ViewController: UIViewController {
                 decoder.dateDecodingStrategy = .formatted(dateFormatter)
                 
                 let lessons = try decoder.decode([Lesson].self, from: data)
-                print(lessons.first?.date)
+                print(lessons.first?.comments?.first?.user.name)
             }catch{
                 print(error)
             }
